@@ -1,3 +1,6 @@
+# 3d-Models-for-the-Pulse-features
+this are the building blocks for the pulse feature
+
 # 🧪 Cinematic Periodic Table (Plan A+)
 
 A world-class, interactive 3D Periodic Table experience built with **Three.js** and **Vite**. This project pushes the boundaries of web-based visualization with a hybrid WebGL/CSS3D rendering engine.
