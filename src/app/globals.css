@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #00ffff;
+}
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Helvetica, sans-serif;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.holographic {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+@keyframes shimmer {
+  0% { transform: translate(-100%, -100%) rotate(45deg); }
+  100% { transform: translate(100%, 100%) rotate(45deg); }
+}
