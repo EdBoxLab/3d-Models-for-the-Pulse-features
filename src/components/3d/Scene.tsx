@@ -7,6 +7,7 @@ import { EffectComposer, Bloom, Noise } from "@react-three/postprocessing";
 
 import { CosmicBackground } from "./CosmicBackground";
 import { ElementCard } from "./ElementCard";
+import { Character } from "./Character";
 import { elements } from "@/data/elements";
 import { getLayoutPosition, getLayoutRotation, LayoutType } from "@/utils/layouts";
 import { useRouter } from "next/navigation";
@@ -31,23 +32,23 @@ function CinematicGroup({ layout, searchQuery }: CinematicGroupProps) {
   return (
     <group ref={groupRef}>
       {elements.map((element, index) => {
-         const pos = getLayoutPosition(layout, element, index, elements.length);
-         const rot = getLayoutRotation(layout, index, elements.length, pos);
+        const pos = getLayoutPosition(layout, element, index, elements.length);
+        const rot = getLayoutRotation(layout, index, elements.length, pos);
 
-         const matches = !searchQuery ||
-           element.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           element.symbol.toLowerCase().includes(searchQuery.toLowerCase());
+        const matches = !searchQuery ||
+          element.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          element.symbol.toLowerCase().includes(searchQuery.toLowerCase());
 
-         return (
-           <ElementCard
-             key={element.symbol}
-             element={element}
-             position={pos}
-             rotation={rot}
-             dimmed={!matches}
-             onClick={() => router.push(`/element/${element.symbol.toLowerCase()}`)}
-           />
-         );
+        return (
+          <ElementCard
+            key={element.symbol}
+            element={element}
+            position={pos}
+            rotation={rot}
+            dimmed={!matches}
+            onClick={() => router.push(`/element/${element.symbol.toLowerCase()}`)}
+          />
+        );
       })}
     </group>
   );
@@ -58,16 +59,20 @@ export function Scene({ layout = "table", searchQuery = "" }: { layout?: LayoutT
     <div className="fixed inset-0 z-0 bg-black">
       <Canvas dpr={[1, 2]} gl={{ antialias: false, alpha: true }}>
         <Suspense fallback={null}>
-          <PerspectiveCamera makeDefault position={[0, 0, 2200]} fov={40} />
+          <PerspectiveCamera makeDefault position={[0, 0, 3800]} fov={40} />
+
+          <ambientLight intensity={1} />
+          <directionalLight position={[10, 10, 5]} intensity={2} />
 
           <CosmicBackground />
+          <Character position={[1800, -250, 0]} scale={500} />
           <CinematicGroup layout={layout} searchQuery={searchQuery} />
 
           <OrbitControls
             enableDamping
             dampingFactor={0.05}
             minDistance={500}
-            maxDistance={6000}
+            maxDistance={8000}
             makeDefault
           />
 
